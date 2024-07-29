@@ -1,8 +1,8 @@
-package br.com.store.gmajor.controllers;
+package br.com.store.gmajor.user.controllers;
 
-import br.com.store.gmajor.domain.user.RequestUserDTO;
-import br.com.store.gmajor.domain.user.User;
-import br.com.store.gmajor.domain.user.UserRepository;
+import br.com.store.gmajor.user.dto.RequestUserDTO;
+import br.com.store.gmajor.user.domain.User;
+import br.com.store.gmajor.user.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -25,12 +25,6 @@ public class UserController {
         return ResponseEntity.ok(allUsers);
     }
 
-    @PostMapping
-    public ResponseEntity registerUser(@RequestBody @Valid RequestUserDTO data){
-        User newUser = new User(data);
-        repository.save(newUser);
-        return ResponseEntity.ok().build();
-    }
 
     @PutMapping
     @Transactional
@@ -40,7 +34,7 @@ public class UserController {
             User user = optionalUser.get();
             user.setUsername(data.username());
             user.setEmail(data.email());
-            user.setPassword(data.email());
+            repository.save(user);
             return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.notFound().build();
@@ -54,6 +48,7 @@ public class UserController {
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
             user.setActive(false);
+            repository.save(user);
             return ResponseEntity.noContent().build();
         } else {
             throw new EntityNotFoundException();
