@@ -1,0 +1,6 @@
+CREATE TABLE categories (
+id BIGSERIAL PRIMARY KEY NOT NULL,
+name VARCHAR NOT NULL,
+menu_Visible BOOLEAN NOT NULL,
+CONSTRAINT uk_categories_name UNIQUE (name)
+);
