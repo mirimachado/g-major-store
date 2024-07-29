@@ -1,4 +1,4 @@
-package br.com.store.gmajor.principal;
+package br.com.store.gmajor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

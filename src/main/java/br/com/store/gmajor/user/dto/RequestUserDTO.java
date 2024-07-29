@@ -1,4 +1,4 @@
-package br.com.store.gmajor.domain.user;
+package br.com.store.gmajor.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
