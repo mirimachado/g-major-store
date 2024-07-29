@@ -1,14 +1,17 @@
 package br.com.store.gmajor.person.domain;
 
+import br.com.store.gmajor.address.domain.Address;
 import br.com.store.gmajor.user.domain.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
 
 
 @Entity(name = "persons")
@@ -26,7 +29,7 @@ public class Person {
     private String name;
     @NotEmpty
     private String phone;
-    @Max(11)
+    @Size(max = 11)
     @NotEmpty
     private String cpf;
     @NotEmpty
@@ -35,6 +38,9 @@ public class Person {
     private User user;
 
     private Boolean active;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Address> addresses;
 
 
     public Person(String phone, Long id, String name, String cpf, User user, Boolean active) {
