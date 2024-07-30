@@ -3,7 +3,7 @@ package br.com.store.gmajor.category.controllers;
 
 import br.com.store.gmajor.category.domain.Category;
 import br.com.store.gmajor.category.dto.RequestCategoryDTO;
-import br.com.store.gmajor.category.repositories.CateroryRepository;
+import br.com.store.gmajor.category.repositories.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class CategoryController {
 
     @Autowired
-    private CateroryRepository repository;
+    private CategoryRepository repository;
 
     @GetMapping
     public ResponseEntity getAllCategories(){
