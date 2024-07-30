@@ -2,7 +2,6 @@ package br.com.store.gmajor.address.domain;
 
 import br.com.store.gmajor.person.domain.Person;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
