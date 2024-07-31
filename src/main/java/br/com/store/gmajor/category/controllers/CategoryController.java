@@ -8,9 +8,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,10 +24,10 @@ public class CategoryController {
     private CategoryRepository repository;
 
     @GetMapping
-    public ResponseEntity getAllCategories(){
+    public ResponseEntity getAllCategories(Pageable pageable){
 
-        var allCategories = repository.findAllByActiveTrue();
-        return ResponseEntity.ok(allCategories);
+        Page<List<Category>> categories = repository.findAllByActiveTrue(pageable);
+        return ResponseEntity.ok(categories);
 
     }
 
