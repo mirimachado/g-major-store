@@ -7,9 +7,13 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,9 +24,10 @@ public class UserController {
     private UserRepository repository;
 
     @GetMapping
-    public ResponseEntity getAllUsers(){
-        var allUsers = repository.findAllByActiveTrue();
-        return ResponseEntity.ok(allUsers);
+    public ResponseEntity getAllUsers(Pageable pageable){
+        Page<List<User>> users = repository.findAllByActiveTrue(pageable);
+        return ResponseEntity.ok(users);
+
     }
 
 

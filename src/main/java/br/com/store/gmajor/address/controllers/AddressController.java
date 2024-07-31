@@ -6,9 +6,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,11 +21,12 @@ public class AddressController {
     @Autowired
     private AddressRepository repository;
 
-    @GetMapping
-    public ResponseEntity getAllAddresses(){
 
-        var allAddresses = repository.findAllByActiveTrue();
-        return ResponseEntity.ok(allAddresses);
+    @GetMapping
+    public ResponseEntity getAllAddresses(Pageable pageable){
+
+        Page<List<Address>> addresses =  repository.findAllByActiveTrue(pageable);
+        return ResponseEntity.ok(addresses);
 
     }
 
