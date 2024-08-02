@@ -10,4 +10,5 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Long>{
 
     Page<List<Person>> findAllByActiveTrue(Pageable pageable);
+
 }

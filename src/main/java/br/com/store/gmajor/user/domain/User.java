@@ -1,5 +1,6 @@
 package br.com.store.gmajor.user.domain;
 
+import br.com.store.gmajor.favorite.domain.Favorite;
 import br.com.store.gmajor.person.domain.Person;
 import br.com.store.gmajor.user.dto.RequestUserDTO;
 import jakarta.annotation.Nullable;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "users")
 @Table(name = "users")
@@ -42,6 +44,8 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Person person;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Favorite> favorites;
 
     public User(String token, String password, UserRole role){
         this.token = token;

@@ -1,12 +1,17 @@
 package br.com.store.gmajor.product.domain;
 
 import br.com.store.gmajor.category.domain.Category;
+import br.com.store.gmajor.favorite.domain.Favorite;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Set;
 
 
 @Entity(name = "products")
@@ -34,6 +39,11 @@ public class Product {
     private Integer quantity;
 
     private Boolean active = true;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Favorite> favorites;
+
+
 
 
 }
