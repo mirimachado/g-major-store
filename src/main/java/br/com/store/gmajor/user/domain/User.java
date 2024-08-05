@@ -48,7 +48,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Favorite> favorites;
 
-    @NotNull
+
     @OneToOne(mappedBy = "user")
     private Cart cart;
 
