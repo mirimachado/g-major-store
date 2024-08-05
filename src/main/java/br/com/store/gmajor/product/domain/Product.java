@@ -1,5 +1,6 @@
 package br.com.store.gmajor.product.domain;
 
+import br.com.store.gmajor.cartitems.domain.CartItems;
 import br.com.store.gmajor.category.domain.Category;
 import br.com.store.gmajor.favorite.domain.Favorite;
 import jakarta.persistence.*;
@@ -39,6 +40,10 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Favorite> favorites;
+
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItems> cartItems;
 
 
 
