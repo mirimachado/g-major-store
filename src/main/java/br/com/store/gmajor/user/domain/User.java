@@ -1,5 +1,6 @@
 package br.com.store.gmajor.user.domain;
 
+import br.com.store.gmajor.cart.domain.Cart;
 import br.com.store.gmajor.favorite.domain.Favorite;
 import br.com.store.gmajor.person.domain.Person;
 import br.com.store.gmajor.user.dto.RequestUserDTO;
@@ -46,6 +47,10 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Favorite> favorites;
+
+    @NotNull
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     public User(String token, String password, UserRole role){
         this.token = token;
