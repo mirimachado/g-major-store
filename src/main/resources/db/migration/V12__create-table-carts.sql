@@ -1,0 +1,6 @@
+CREATE TABLE carts (
+id BIGSERIAL PRIMARY KEY NOT NULL,
+user_id BIGINT NOT NULL,
+CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+CONSTRAINT uk_cart_user_id UNIQUE (user_id)
+);

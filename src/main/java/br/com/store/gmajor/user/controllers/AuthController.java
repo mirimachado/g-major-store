@@ -1,6 +1,8 @@
 package br.com.store.gmajor.user.controllers;
 
 
+import br.com.store.gmajor.cart.domain.Cart;
+import br.com.store.gmajor.cart.repositories.CartRepository;
 import br.com.store.gmajor.user.domain.User;
 import br.com.store.gmajor.user.dto.LoginRequestDTO;
 import br.com.store.gmajor.user.dto.RegisterRequestDTO;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class AuthController {
 
     private final UserRepository repository;
+    private final CartRepository repositoryCart;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
@@ -42,11 +45,13 @@ public class AuthController {
         Optional<User> user = this.repository.findByEmail(body.email());
         if (user.isEmpty()){
             User newUser = new User();
+            Cart newCart = new Cart();
             newUser.setPassword(passwordEncoder.encode(body.password()));
             newUser.setEmail(body.email());
             newUser.setUsername(body.username());
             newUser.setRole(body.role());
             this.repository.save(newUser);
+            this.repositoryCart.save(newCart);
                 String token = this.tokenService.generateToken(newUser);
                 return ResponseEntity.ok(new ResponseDTO(newUser.getPassword(), token));
         }
